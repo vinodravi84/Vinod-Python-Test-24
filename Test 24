@@ -1,0 +1,280 @@
+"""You can use this class to represent how classy someone
+or something is.
+"Classy" is interchangable with "fancy".
+If you add fancy-looking items, you will increase
+your "classiness".
+Create a function in "Classy" that takes a string as
+input and adds it to the "items" list.
+Another method should calculate the "classiness"
+value based on the items.
+The following items have classiness points associated
+with them:
+"tophat" = 2
+"bowtie" = 4
+"monocle" = 5
+Everything else has 0 points.
+Use the test cases below to guide you!"""
+
+class Classy(object):
+    def __init__(self):
+        self.items = []
+    
+    def addItem(self, item):
+        self.items.append(item)
+    
+    def getClassiness(self):
+        classiness = 0
+        
+        if len(self.items) > 0:
+            for item in self.items:
+                if item == "tophat":
+                    classiness += 2
+                elif item == "bowtie":
+                    classiness += 4
+                elif item == "monocle":
+                    classiness += 5
+        return classiness
+
+
+# Test cases
+me = Classy()
+
+# Should be 0
+print me.getClassiness()
+
+me.addItem("tophat")
+# Should be 2
+print me.getClassiness()
+
+me.addItem("bowtie")
+me.addItem("jacket")
+me.addItem("monocle")
+# Should be 11
+print me.getClassiness()
+
+me.addItem("bowtie")
+# Should be 15
+print me.getClassiness()
+
+
+.# Write a function called "show_excitement" where the string
+# "I am super excited for this course!" is returned exactly
+# 5 times, where each sentence is separated by a single space.
+# Return the string with "return".
+# You can only have the string once in your code.
+# Don't just copy/paste it 5 times into a single variable!
+
+
+def show_excitement():
+    # Your code goes here!
+    return ""
+
+print show_excitement()
+
+def show_excitement():
+    return ' '.join(['I am super excited for this course!'] * 5)
+    
+    
+    
+question-4    
+   class Vehicle:
+    def __init__(self, name, mileage, capacity):
+        self.name = name
+        self.mileage = mileage
+        self.capacity = capacity
+
+    def fare(self):
+        return self.capacity * 100
+
+class Bus(Vehicle):
+    def fare(self):
+        amount = super().fare()
+        amount += amount * 10 / 100
+        return amount
+
+School_bus = Bus("School Volvo", 12, 50)
+print("Total Bus fare is:", School_bus.fare())
+
+
+
+question-5
+sample_dict = {
+    "name": "Kelly",
+    "age": 25,
+    "salary": 8000,
+    "city": "New york"
+}
+
+sample_dict['location'] = sample_dict.pop('city')
+print(sample_dict)
+
+
+question-6
+import heapq
+ 
+ 
+# A simple implementation of max-heap based on `heapq`
+class MaxHeap:
+ 
+    def __init__(self, data=None):
+        if data is None:
+            self.data = []
+        else:
+            self.data = [-i for i in data]
+            heapq.heapify(self.data)
+ 
+    def top(self):
+        return -self.data[0]
+ 
+    def push(self, item):
+        heapq.heappush(self.data, -item)
+ 
+    def pop(self):
+        return -heapq.heappop(self.data)
+ 
+    def replace(self, item):
+        return heapq.heapreplace(self.data, -item)
+ 
+ 
+# Function to find the k'th smallest element in a list using max-heap
+def find_kth_smallest(input, k):
+ 
+    # base case
+    if not input or len(input) < k:
+        exit(-1)
+ 
+    # build a max-heap from the first `k` elements in the list
+    pq = MaxHeap(input[0:k])
+ 
+    # do for remaining list elements
+    for i in range(k, len(input)):
+        # if the current element is less than the root of the heap
+        if input[i] < pq.top():
+            # replace root with the current element
+            pq.replace(input[i])
+ 
+    # return the root of max-heap
+    return pq.top()
+ 
+ 
+ question-7
+ # Naive method to find a pair in a list with the given sum
+def findPair(nums, target):
+ 
+    # consider each element except the last
+    for i in range(len(nums) - 1):
+ 
+        # start from the i'th element until the last element
+        for j in range(i + 1, len(nums)):
+ 
+            # if the desired sum is found, print it
+            if nums[i] + nums[j] == target:
+                print('Pair found', (nums[i], nums[j]))
+                return
+ 
+    # No pair with the given sum exists in the list
+    print('Pair not found')
+    
+    question-8
+    
+
+def printArray(arr, n): 
+    for i in range(n): 
+        print(arr[i], end = " ") 
+    print() 
+  
+def RearrangePosNeg(arr, n): 
+  
+    for i in range(1, n): 
+        key = arr[i] 
+  
+        # if current element is positive 
+        # do nothing 
+        if (key > 0): 
+            continue
+        j = i - 1
+        while (j >= 0 and arr[j] > 0): 
+            arr[j + 1] = arr[j] 
+            j = j - 1
+  
+        # Put negative element at its  
+        # right position 
+        arr[j + 1] = key 
+  
+  
+  question-10
+  class Solution:
+    def maxProductDifference(self, nums: List[int]) -> int:
+        nums.sort()
+        return nums[-1] * nums[-2] - nums[0] * nums[1]
+        
+        
+        
+   question-11
+   class Solution(object):
+    def mostWordsFound(self, sentences):
+        """
+        :type sentences: List[str]
+        :rtype: int
+        """
+        result = 0
+        for sentence in sentences:
+            word_count = 0
+            sentence = sentence.split(' ')
+            for word in sentence:                
+                word_count += 1
+            if word_count > result:
+                result = word_count
+        return result
+        
+        
+     question-12
+     class Solution:
+    def balancedStringSplit(self, s: str) -> int:
+        ans = l = 0
+        for c in s:
+            if c == 'L':
+                l += 1
+            else:
+                l -= 1
+            if l == 0:
+                ans += 1
+        return ans
+        
+        
+     question-13
+     class Solution:
+    def fizzBuzz(self, n: int) -> List[str]:
+        res = []
+        for i in range(1, n + 1):
+            if i % 15 == 0:
+                res.append("FizzBuzz")
+            elif i % 5 == 0:
+                res.append("Buzz")
+            elif i % 3 == 0:
+                res.append("Fizz")
+            else:
+                res.append(f"{i}")
+        return res
+        
+        
+    question-14
+    myList = [6, 2, 5 ,1, 4]
+
+# Creating list of tuples 
+tupleList = [] 
+for val in myList:
+    myTuple = (val, (val*val*val))
+    tupleList.append(myTuple)
+
+# print the result
+print("The list of Tuples is " , str(tupleList))
+
+question-15
+number = int(input("Type a number: "))
+
+numberDict = {}
+for i in range(1, number+1):
+    numberDict[i] = i*i
+
+print(numberDict)
